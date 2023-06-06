@@ -8,13 +8,23 @@
 
 // Modules required for most of these exercises
 const { readFileSync } = require('fs');
-const { load, TAGS, ImageIFD, ExifIFD, GPSIFD } =  require('piexifjs');
+const { load, TAGS, ImageIFD, ExifIFD, GPSIFD } = require('piexifjs');
 
 // Handy utility functions
-const getBase64DataFromJpegFile = (filename) =>
+const getBinaryDataFromJpegFile = (filename) =>
   readFileSync(filename).toString('binary');
+const getExifFromBase64File = (filename) =>
+  load(getBinaryDataFromBase64Data('./images/img.base64'));
 const getExifFromJpegFile = (filename) =>
   load(getBase64DataFromJpegFile(filename));
+
+const getBinaryDataFromBase64Data = (filename) => {
+  let data = readFileSync(filename);
+  return Buffer.from(data.toString(), 'base64').toString('binary');
+};
+
+// console.log(getData('./images/img.base64'));
+// console.log(readFileSync('./images/img.base64').toString());
 
 // Get the Exif data for the palm tree photos
 // (Assumes that the photos “palm tree 1.jpg” and “palm tree 2.jpg”
