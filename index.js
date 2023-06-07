@@ -13,18 +13,17 @@ const { load, TAGS, ImageIFD, ExifIFD, GPSIFD } = require('piexifjs');
 // Handy utility functions
 const getBinaryDataFromJpegFile = (filename) =>
   readFileSync(filename).toString('binary');
-const getExifFromBase64File = (filename) =>
-  load(getBinaryDataFromBase64Data('./images/img.base64'));
-const getExifFromJpegFile = (filename) =>
-  load(getBase64DataFromJpegFile(filename));
-
 const getBinaryDataFromBase64Data = (filename) => {
   let data = readFileSync(filename);
   return Buffer.from(data.toString(), 'base64').toString('binary');
 };
 
-// console.log(getData('./images/img.base64'));
-// console.log(readFileSync('./images/img.base64').toString());
+const getExifFromBase64File = (base64Filename) =>
+  load(getBinaryDataFromBase64Data(base64Filename));
+const getExifFromJpegFile = (filename) =>
+  load(getBinaryDataFromJpegFile(filename));
+
+console.log(getExifFromBase64File('./images/img.base64'));
 
 // Get the Exif data for the palm tree photos
 // (Assumes that the photos “palm tree 1.jpg” and “palm tree 2.jpg”
@@ -34,8 +33,8 @@ const palm2Exif = getExifFromJpegFile('./images/palm tree 2.jpg');
 const palmExifs = [palm1Exif, palm2Exif];
 
 // Show the Exif data for the two palm tree photos:
-console.log(palm1Exif);
-console.log(palm2Exif);
+// console.log(palm1Exif);
+// console.log(palm2Exif);
 
 // Making Exif Data Easier to Read
 // -------------------------------
@@ -55,11 +54,13 @@ function debugExif(exif) {
     }
   }
 }
+debugExif(palm1Exif);
+debugExif(palm2Exif);
 
 // Show the Exif data for the two palm tree photos in
 // an easier to read format:
-console.log(palm1Exif);
-console.log(palm2Exif);
+// console.log(palm1Exif);
+// console.log(palm2Exif);
 
 // What Device Took the Photo, and What OS Version Did It Use?
 // -----------------------------------------------------------
