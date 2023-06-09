@@ -12,3 +12,4 @@
 [ngraminator.js](https://www.npmjs.com/package/ngraminator) -
 Read about N-gram -
 [stemming](https://www.elastic.co/guide/en/elasticsearch/reference/current/stemming.html) -
+[elasticlunr.js](http://elasticlunr.com/docs/index.html) -
